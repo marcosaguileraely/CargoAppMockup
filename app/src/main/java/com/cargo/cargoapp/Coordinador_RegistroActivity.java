@@ -19,7 +19,7 @@ import com.parse.SignUpCallback;
 
 public class Coordinador_RegistroActivity extends ActionBarActivity {
 
-    EditText name, lastname, mobile, dni, pass, repass, email;
+    EditText name, lastname, dni, pass, repass, email;
     Button   guardar, cancelar;
 
     @Override
@@ -29,11 +29,11 @@ public class Coordinador_RegistroActivity extends ActionBarActivity {
 
         name     = (EditText) findViewById(R.id.nombres);
         lastname = (EditText) findViewById(R.id.apellidos);
-        //mobile = (EditText) findViewById(R.id.mobile);
         dni      = (EditText) findViewById(R.id.no_cedula);
         pass     = (EditText) findViewById(R.id.clave);
         repass   = (EditText) findViewById(R.id.re_clave);
         email    = (EditText) findViewById(R.id.correo);
+        guardar  = (Button) findViewById(R.id.guardar_button);
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +41,6 @@ public class Coordinador_RegistroActivity extends ActionBarActivity {
                 final String usertxt   = dni.getText().toString();
                 final String passtxt   = pass.getText().toString();
                 final String emailtxt  = email.getText().toString();
-                final String mobiletxt = mobile.getText().toString();
                 final String nametxt   = name.getText().toString();
                 final String lasttxt   = lastname.getText().toString();
 
@@ -51,25 +50,24 @@ public class Coordinador_RegistroActivity extends ActionBarActivity {
                 user.setEmail(String.valueOf(emailtxt));    //3
                 user.put("nombres", nametxt);               //4
                 user.put("apellidos", lasttxt);             //5
-                user.put("dni", usertxt);                   //6
+                user.put("dni", Integer.parseInt(usertxt)); //6
                 user.put("tipo_dni", "Cédula Ciudadanía");  //7
                 user.put("tipo_usuario", "coordinador");    //8
 
                 user.signUpInBackground(new SignUpCallback() {
                     public void done(ParseException e) {
                         if(e == null) {
-                            Toast.makeText(getApplicationContext(), "Registro exitoso. Enviando notificación...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Registro exitoso. Enviando notificación...", Toast.LENGTH_LONG).show();
                             //SendMail sendMail =  new SendMail();
                             //sendMail.sendEmailNotification(emailtxt, fullname, usertxt, passtxt, now, citytxt);
                             Intent intent = new Intent(Coordinador_RegistroActivity.this, Coordinador_LoginActivity.class);
                             startActivity(intent);
                         }else {
                             Log.d("Action", e.toString());
-                            Toast.makeText(getApplicationContext(), "¡Ups! intentalo nuevamente. @" + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "¡Ups! intentalo nuevamente. @" + e.toString(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
 
             }
         });
