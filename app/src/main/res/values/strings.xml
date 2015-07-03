@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_intro">Bievenido</string>
+    <string name="title_activity_coordinador__login">Acceso Coordinador</string>
+    <string name="title_activity_conductor_login">Acceso Conductor</string>
+    <string name="title_activity_conductor_registro_">ConductorRegistro_Activity</string>
+    <string name="title_activity_coordinador__registro">Registro</string>
 </resources>
